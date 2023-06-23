@@ -17,8 +17,8 @@ function evalChildrenDev(children, props, path) {
   warning(
     value !== undefined,
     "You returned `undefined` from the `children` function of " +
-      `<Route${path ? ` path="${path}"` : ""}>, but you ` +
-      "should have returned a React element or `null`"
+    `<Route${path ? ` path="${path}"` : ""}>, but you ` +
+    "should have returned a React element or `null`"
   );
 
   return value || null;
@@ -41,11 +41,11 @@ class Route extends React.Component {
           const match = this.props.computedMatch
             ? this.props.computedMatch
             : prefixedPath
-            ? matchPath(location.pathname, {
+              ? matchPath(location.pathname, {
                 ...this.props,
                 path: prefixedPath
               })
-            : context.match;
+              : context.match;
 
           const props = { ...context, location, match };
 
@@ -60,15 +60,13 @@ class Route extends React.Component {
               {props.match
                 ? children
                   ? typeof children === "function"
-                    ? __DEV__
-                      ? evalChildrenDev(children, props, prefixedPath)
-                      : children(props)
+                    ? evalChildrenDev(children, props, prefixedPath)
                     : children
                   : component
-                  ? React.createElement(component, props)
-                  : render
-                  ? render(props)
-                  : null
+                    ? React.createElement(component, props)
+                    : render
+                      ? render(props)
+                      : null
                 : null}
             </RouterContext.Provider>
           );
@@ -99,7 +97,7 @@ if (__DEV__) {
     strict: PropTypes.bool
   };
 
-  Route.prototype.componentDidMount = function() {
+  Route.prototype.componentDidMount = function () {
     warning(
       !(
         this.props.children &&
@@ -124,7 +122,7 @@ if (__DEV__) {
     );
   };
 
-  Route.prototype.componentDidUpdate = function(prevProps) {
+  Route.prototype.componentDidUpdate = function (prevProps) {
     warning(
       !(this.props.location && !prevProps.location),
       '<Route> elements should not change from uncontrolled to controlled (or vice versa). You initially used no "location" prop and then provided one on a subsequent render.'

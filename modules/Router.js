@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useMemo } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import PropTypes from "prop-types";
 
 import HistoryContext from "./HistoryContext.js";
@@ -10,8 +10,40 @@ function Router(props) {
   // contexts is defined at a global scope within experience for extesnions
   // eslint-disable-next-line no-undef
   const history = useContext(contexts.ExtensionContext)?.dashboardInfo?.history;
-  const location = useMemo(() => history.location, [history.location]);
+
+  const [location, setLocation] = useState(history.location);
+  const [isMounted, setIsMounted] = useState(false);
+  const [pendingLocation, setPendingLocation] = useState(null);
+
   const baseExtensionPath = useBasePath();
+
+  useEffect(() => {
+    setIsMounted(true);
+
+    if (pendingLocation) {
+      setLocation(pendingLocation);
+    }
+
+    return () => {
+      if (history.unlisten) history.unlisten();
+    };
+  }, [pendingLocation, history]);
+
+  useEffect(() => {
+    if (!props.staticContext) {
+      const unlisten = history.listen(newLocation => {
+        if (isMounted) {
+          setLocation(newLocation);
+        } else {
+          setPendingLocation(newLocation);
+        }
+      });
+
+      return () => {
+        unlisten();
+      };
+    }
+  }, [isMounted, history, props.staticContext]);
 
   useEffect(() => {
     if (props.debug) {

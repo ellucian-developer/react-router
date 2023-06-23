@@ -1,10 +1,9 @@
 {
-  "name": "react-router",
+  "name": "@ellucian/react-router",
   "version": "5.2.0",
   "description": "Declarative routing for React",
-  "repository": "react-router",
+  "repository": "@ellucian/react-router",
   "license": "MIT",
-  "author": "React Training <hello@reacttraining.com>",
   "files": [
     "MemoryRouter.js",
     "Prompt.js",
