@@ -25,7 +25,7 @@
     "umd"
   ],
   "main": "index.js",
-  "module": "esm/react-router.js",
+  "module": "esm/@ellucian/react-router.js",
   "sideEffects": false,
   "scripts": {
     "build": "rollup -c",
