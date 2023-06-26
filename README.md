@@ -1,39 +1,27 @@
 # react-router
 
-Declarative routing for [React](https://facebook.github.io/react).
+A safe react-router wrapper for use in Ellucian Experience Extensions. Used as a dependency in react-router-dom.
 
-## Installation
+If you are already using react-router-dom in your Extension, you do not need to include this package.
 
-Using [npm](https://www.npmjs.com/):
+Check out [@ellucian/react-router-dom](https://github.com/ellucian-developer/react-router-dom) for more details
 
-    $ npm install --save react-router
+## Differences
 
-**Note:** This package provides the core routing functionality for React Router, but you might not want to install it directly. If you are writing an application that will run in the browser, you should instead install `react-router-dom`. Similarly, if you are writing a React Native application, you should instead install `react-router-native`. Both of those will install `react-router` as a dependency.
+### Router
 
-Then with a module bundler like [webpack](https://webpack.github.io/), use as you would anything else:
+Changes have been made to the Router components to always assume history based on the Ellucian Experience Router. This history is stored in context and shared among the other child components
 
-```js
-// using ES6 modules
-import { Router, Route, Switch } from "react-router";
+Additionally, a `debug` prop has been added which can help debug history changes and location during development. `debug` is a boolean which defaults to false.
 
-// using CommonJS modules
-var Router = require("react-router").Router;
-var Route = require("react-router").Route;
-var Switch = require("react-router").Switch;
-```
+### Switch
 
-The UMD build is also available on [unpkg](https://unpkg.com):
+Grabs new history from context, and uses this as a base for all child `Route` components.
 
-```html
-<script src="https://unpkg.com/react-router/umd/react-router.min.js"></script>
-```
+### Route
 
-You can find the library on `window.ReactRouter`.
+Adds an appropriate prefix based on history context. The prop `path` should remain unchanged from it's standard usage.
 
-## Issues
+### Redirect
 
-If you find a bug, please file an issue on [our issue tracker on GitHub](https://github.com/ReactTraining/react-router/issues).
-
-## Credits
-
-React Router is built and maintained by [React Training](https://reacttraining.com).
+Prefixs redirect paths based on history context. The prop `to` should remain unchanged from it's standard usage.
