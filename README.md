@@ -25,3 +25,9 @@ Adds an appropriate prefix based on history context. The prop `path` should rema
 ### Redirect
 
 Prefixs redirect paths based on history context. The prop `to` should remain unchanged from it's standard usage.
+
+## Contribute
+
+If there's a bug please submit open an issue report through GitHub's interface.
+
+Pull Requests are welcomed.
