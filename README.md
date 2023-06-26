@@ -4,7 +4,9 @@ A safe react-router wrapper for use in Ellucian Experience Extensions. Used as a
 
 If you are already using react-router-dom in your Extension, you do not need to include this package.
 
-Check out [@ellucian/react-router-dom](https://github.com/ellucian-developer/react-router-dom) for more details
+Check out [@ellucian/react-router-dom](https://github.com/ellucian-developer/react-router-dom) for more details.
+
+The following components have been modified to take experience history context into account
 
 ## Differences
 
@@ -20,14 +22,14 @@ Grabs new history from context, and uses this as a base for all child `Route` co
 
 ### Route
 
-Adds an appropriate prefix based on history context. The prop `path` should remain unchanged from it's standard usage.
+Adds the appropriate URL prefix based on history context. The prop `path` should remain unchanged from it's standard usage.
 
 ### Redirect
 
-Prefixs redirect paths based on history context. The prop `to` should remain unchanged from it's standard usage.
+Adds the appropriate URL prefix redirect paths based on history context. The prop `to` should remain unchanged from it's standard usage.
 
 ## Contribute
 
-If there's a bug please submit open an issue report through GitHub's interface.
+If there's a bug please open an issue report through GitHub's interface.
 
 Pull Requests are welcomed.
