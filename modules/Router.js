@@ -78,11 +78,29 @@ function Router(props) {
         children={props.children || null}
         value={{
           ...history,
-          push: path => {
-            history.push(baseExtensionPath + path);
+          push: (path, state) => {
+            if (typeof path === 'object') {
+              const prefixedPath = baseExtensionPath + path.pathname;
+              const modifiedPath = {
+                ...path,
+                pathname: prefixedPath
+              };
+              history.push(modifiedPath, state);
+            } else {
+              history.push(baseExtensionPath + path, state);
+            }
           },
-          replace: path => {
-            history.replace(baseExtensionPath + path);
+          replace: (path, state) => {
+            if (typeof path === 'object') {
+              const prefixedPath = baseExtensionPath + path.pathname;
+              const modifiedPath = {
+                ...path,
+                pathname: prefixedPath
+              };
+              history.replace(modifiedPath, state);
+            } else {
+              history.replace(baseExtensionPath + path, state);
+            }
           },
           location: {
             ...history.location,

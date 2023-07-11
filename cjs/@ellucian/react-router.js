@@ -147,11 +147,27 @@ function Router(props) {
   }, /*#__PURE__*/React__default.createElement(historyContext.Provider, {
     children: props.children || null,
     value: _extends({}, history, {
-      push: function push(path) {
-        history.push(baseExtensionPath + path);
+      push: function push(path, state) {
+        if (typeof path === 'object') {
+          var prefixedPath = baseExtensionPath + path.pathname;
+          var modifiedPath = _extends({}, path, {
+            pathname: prefixedPath
+          });
+          history.push(modifiedPath, state);
+        } else {
+          history.push(baseExtensionPath + path, state);
+        }
       },
-      replace: function replace(path) {
-        history.replace(baseExtensionPath + path);
+      replace: function replace(path, state) {
+        if (typeof path === 'object') {
+          var prefixedPath = baseExtensionPath + path.pathname;
+          var modifiedPath = _extends({}, path, {
+            pathname: prefixedPath
+          });
+          history.replace(modifiedPath, state);
+        } else {
+          history.replace(baseExtensionPath + path, state);
+        }
       },
       location: _extends({}, history.location, {
         pathname: baseExtensionPath + history.location.pathname
