@@ -7,9 +7,10 @@ import RouterContext from "./RouterContext.js";
 import useBasePath from "./generateExtensionPath.js";
 
 function Router(props) {
+  // if history is explicitly passed, use this. most commonly used for UTs
   // contexts is defined at a global scope within experience for extesnions
   // eslint-disable-next-line no-undef
-  const history = useContext(contexts.ExtensionContext)?.dashboardInfo?.history;
+  const history = props.history ?? useContext(contexts.ExtensionContext)?.dashboardInfo?.history;
 
   const [location, setLocation] = useState(history.location);
   const [isMounted, setIsMounted] = useState(false);

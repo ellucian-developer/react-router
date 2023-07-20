@@ -88,10 +88,11 @@ function useBasePath() {
 }
 
 function Router(props) {
-  var _useContext, _useContext$dashboard;
+  var _props$history, _useContext, _useContext$dashboard;
+  // if history is explicitly passed, use this. most commonly used for UTs
   // contexts is defined at a global scope within experience for extesnions
   // eslint-disable-next-line no-undef
-  var history = (_useContext = React.useContext(contexts.ExtensionContext)) === null || _useContext === void 0 ? void 0 : (_useContext$dashboard = _useContext.dashboardInfo) === null || _useContext$dashboard === void 0 ? void 0 : _useContext$dashboard.history;
+  var history = (_props$history = props.history) !== null && _props$history !== void 0 ? _props$history : (_useContext = React.useContext(contexts.ExtensionContext)) === null || _useContext === void 0 ? void 0 : (_useContext$dashboard = _useContext.dashboardInfo) === null || _useContext$dashboard === void 0 ? void 0 : _useContext$dashboard.history;
   var _useState = React.useState(history.location),
     location = _useState[0],
     setLocation = _useState[1];
