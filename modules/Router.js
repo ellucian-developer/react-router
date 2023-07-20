@@ -80,6 +80,10 @@ function Router(props) {
           ...history,
           push: (path, state) => {
             if (typeof path === 'object') {
+              let pathName = path.pathname;
+              if (!pathName.startsWith('/')) {
+                pathName = '/' + path.pathname;
+              }
               const prefixedPath = baseExtensionPath + path.pathname;
               const modifiedPath = {
                 ...path,
@@ -87,7 +91,11 @@ function Router(props) {
               };
               history.push(modifiedPath, state);
             } else {
-              history.push(baseExtensionPath + path, state);
+              let pathName = path;
+              if (!pathName.startsWith('/')) {
+                pathName = '/' + path;
+              }
+              history.push(baseExtensionPath + pathName, state);
             }
           },
           replace: (path, state) => {

@@ -108,13 +108,21 @@ function Router(props) {
     value: _extends({}, history, {
       push: function push(path, state) {
         if (typeof path === 'object') {
+          var pathName = path.pathname;
+          if (!pathName.startsWith('/')) {
+            pathName = '/' + path.pathname;
+          }
           var prefixedPath = baseExtensionPath + path.pathname;
           var modifiedPath = _extends({}, path, {
             pathname: prefixedPath
           });
           history.push(modifiedPath, state);
         } else {
-          history.push(baseExtensionPath + path, state);
+          var _pathName = path;
+          if (!_pathName.startsWith('/')) {
+            _pathName = '/' + path;
+          }
+          history.push(baseExtensionPath + _pathName, state);
         }
       },
       replace: function replace(path, state) {
