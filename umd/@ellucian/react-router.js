@@ -1693,7 +1693,6 @@
     var _useContext, _useContext$pageInfo;
     // eslint-disable-next-line no-undef
     var pageInfo = (_useContext = React.useContext(contexts.ExtensionContext)) === null || _useContext === void 0 ? void 0 : (_useContext$pageInfo = _useContext.pageInfo) === null || _useContext$pageInfo === void 0 ? void 0 : _useContext$pageInfo.basePath;
-    !pageInfo ?  invariant(false, "@ellucian/react-router-dom components cannot be used outside of an extension")  : void 0;
     if (pageInfo) {
       var alias = pageInfo.split("/")[1];
       var modifiedBasePath = pageInfo.replace("/" + alias, "");
