@@ -462,12 +462,26 @@ var Route = /*#__PURE__*/function (_React$Component) {
     var _this = this;
     return /*#__PURE__*/React__default.createElement(context.Consumer, null, function (context$1) {
       var prefix = context$1.baseExtensionPath;
-      var prefixedPath = prefix + _this.props.path;
       !context$1 ?  invariant(false, "You should not use <Route> outside a <Router>")  : void 0;
+      var match = false;
+      if (Array.isArray(_this.props.path)) {
+        for (var i = 0; i < _this.props.path.length; i++) {
+          var _prefixedPath = prefix + _this.props.path[i];
+          match = _this.props.computedMatch ? _this.props.computedMatch : _prefixedPath ? matchPath(location.pathname, _extends({}, _this.props, {
+            path: _prefixedPath
+          })) : context$1.match;
+          if (match) {
+            break;
+          }
+        }
+        // if string
+      } else {
+        var _prefixedPath2 = prefix + _this.props.path;
+        match = _this.props.computedMatch ? _this.props.computedMatch : _prefixedPath2 ? matchPath(location.pathname, _extends({}, _this.props, {
+          path: _prefixedPath2
+        })) : context$1.match;
+      }
       var location = _this.props.location || context$1.location;
-      var match = _this.props.computedMatch ? _this.props.computedMatch : prefixedPath ? matchPath(location.pathname, _extends({}, _this.props, {
-        path: prefixedPath
-      })) : context$1.match;
       var props = _extends({}, context$1, {
         location: location,
         match: match

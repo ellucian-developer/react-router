@@ -33,19 +33,37 @@ class Route extends React.Component {
       <RouterContext.Consumer>
         {context => {
           const prefix = context.baseExtensionPath;
-          const prefixedPath = prefix + this.props.path;
           invariant(context, "You should not use <Route> outside a <Router>");
+          let match = false;
+          if (Array.isArray(this.props.path)) {
+            for (let i = 0; i < this.props.path.length; i++) {
+              const prefixedPath = prefix + this.props.path[i];
+              match = this.props.computedMatch
+                ? this.props.computedMatch
+                : prefixedPath
+                  ? matchPath(location.pathname, {
+                    ...this.props,
+                    path: prefixedPath
+                  })
+                  : context.match;
+              if (match) {
+                break;
+              }
+            }
+            // if string
+          } else {
+            const prefixedPath = prefix + this.props.path;
+            match = this.props.computedMatch
+              ? this.props.computedMatch
+              : prefixedPath
+                ? matchPath(location.pathname, {
+                  ...this.props,
+                  path: prefixedPath
+                })
+                : context.match;
+          }
 
           const location = this.props.location || context.location;
-
-          const match = this.props.computedMatch
-            ? this.props.computedMatch
-            : prefixedPath
-              ? matchPath(location.pathname, {
-                ...this.props,
-                path: prefixedPath
-              })
-              : context.match;
 
           const props = { ...context, location, match };
 
