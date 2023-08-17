@@ -34,15 +34,33 @@ class Switch extends React.Component {
                 strict = false,
                 sensitive = false
               } = child.props;
-              const fullPath = prefix + (path || "");
 
-              // match needs to validate against all parts of the children routes, for the prefixs to work
-              match = matchPath(location.pathname, {
-                path: fullPath,
-                exact,
-                strict,
-                sensitive
-              });
+
+              if (Array.isArray(path)) {
+                for (let i = 0; i < path.length; i++) {
+                  const fullPath = prefix + (path[i] || "");
+
+                  match = matchPath(location.pathname, {
+                    path: fullPath,
+                    exact,
+                    strict,
+                    sensitive
+                  });
+
+                  if (match) {
+                    break;
+                  }
+                }
+              } else {
+                const fullPath = prefix + (path || "");
+                // match needs to validate against all parts of the children routes, for the prefixs to work
+                match = matchPath(location.pathname, {
+                  path: fullPath,
+                  exact,
+                  strict,
+                  sensitive
+                });
+              }
 
               if (match) {
                 element = child;

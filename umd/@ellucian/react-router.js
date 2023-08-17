@@ -2730,15 +2730,29 @@
               strict = _child$props$strict === void 0 ? false : _child$props$strict,
               _child$props$sensitiv = _child$props.sensitive,
               sensitive = _child$props$sensitiv === void 0 ? false : _child$props$sensitiv;
-            var fullPath = prefix + (path || "");
-
-            // match needs to validate against all parts of the children routes, for the prefixs to work
-            match = matchPath(location.pathname, {
-              path: fullPath,
-              exact: exact,
-              strict: strict,
-              sensitive: sensitive
-            });
+            if (Array.isArray(path)) {
+              for (var i = 0; i < path.length; i++) {
+                var fullPath = prefix + (path[i] || "");
+                match = matchPath(location.pathname, {
+                  path: fullPath,
+                  exact: exact,
+                  strict: strict,
+                  sensitive: sensitive
+                });
+                if (match) {
+                  break;
+                }
+              }
+            } else {
+              var _fullPath = prefix + (path || "");
+              // match needs to validate against all parts of the children routes, for the prefixs to work
+              match = matchPath(location.pathname, {
+                path: _fullPath,
+                exact: exact,
+                strict: strict,
+                sensitive: sensitive
+              });
+            }
             if (match) {
               element = child;
             }
