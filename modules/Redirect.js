@@ -30,7 +30,7 @@ function Redirect({ computedMatch, to, push = false }) {
                   ...to,
                   pathname: generatePath(prefixedTo, computedMatch.params)
                 }
-            : to
+            : prefixedTo
         );
 
         // When rendering in a static context,

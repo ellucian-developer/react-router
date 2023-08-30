@@ -336,7 +336,7 @@ function Redirect(_ref) {
     var method = push ? history$1.push : history$1.replace;
     var location = history.createLocation(computedMatch ? typeof to === "string" ? generatePath(prefixedTo, computedMatch.params) : _extends({}, to, {
       pathname: generatePath(prefixedTo, computedMatch.params)
-    }) : to);
+    }) : prefixedTo);
 
     // When rendering in a static context,
     // set the new location immediately.

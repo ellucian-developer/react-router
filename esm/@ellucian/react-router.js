@@ -295,7 +295,7 @@ function Redirect(_ref) {
     var method = push ? history.push : history.replace;
     var location = createLocation(computedMatch ? typeof to === "string" ? generatePath(prefixedTo, computedMatch.params) : _extends({}, to, {
       pathname: generatePath(prefixedTo, computedMatch.params)
-    }) : to);
+    }) : prefixedTo);
 
     // When rendering in a static context,
     // set the new location immediately.
